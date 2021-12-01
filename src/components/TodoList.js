@@ -6,8 +6,9 @@ function TodoList() {
   const [todos, setTodos] = useState([]);
 
   const addTodo = todo => {
-    if(!todo.text || /^\s*$/.test(todo.text)){
-      return;
+    if(todo.text || /^\s*$/.test(todo.text)){
+      localStorage.setItem(todo.id, todo.text);
+      console.log(localStorage.getItem(todo.text))
     }
 
     const newTodos = [todo, ...todos]
@@ -15,9 +16,8 @@ function TodoList() {
   }
 
   const removeTodo= id => {
-    const removeArr = [...todos].filter(todo => todo.id !== id)
-
-    setTodos(removeArr)
+    localStorage.removeItem(id);
+    setTodos([])
   }
 
   const completeTodo = id => {
